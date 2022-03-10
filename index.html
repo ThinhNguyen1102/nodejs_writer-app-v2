@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Writer Web App</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/c72f9ee90e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menu-bars">
+        <div class="menu-bars__top">
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-tag"></i>
+          </div>
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-question-circle"></i>
+          </div>
+        </div>
+        <div class="menu-bars__bottom">
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="menu-bars__icon-box">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="top-title">
+          <h1 class="title">Writer App</h1>
+        </div>
+
+        <div class="main-header">
+          <div class="main-header__search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search" />
+          </div>
+          <div class="main-header__new-note">
+            <a class="new-note">New Note</a>
+          </div>
+        </div>
+
+        <div class="tab">
+          <div class="tab-list">
+            <div class="tab-item is-active" data-tab="1">History</div>
+            <div class="tab-item" data-tab="2">Bookmark</div>
+            <div class="tab-item" data-tab="3">Latest</div>
+          </div>
+          <!-- <div class="tab-line"></div> -->
+          <div class="tab-wrapper">
+            <div class="tab-content is-active" data-tab="1"></div>
+            <div class="tab-content" data-tab="2"></div>
+            <div class="tab-content" data-tab="3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

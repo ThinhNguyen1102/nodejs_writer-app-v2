@@ -1,0 +1,161 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+
+  font-family: "Roboto", sans-serif;
+  color: #444;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: rgb(250, 250, 250);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+  border: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 100vw;
+  background-color: transparent;
+  margin-block-end: 5px;
+  margin-block-end: 5px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 100vw;
+  background-color: rgba(0, 39, 197, 0.1);
+  border: 3px solid #ddd;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 39, 197, 0.3);
+}
+
+.text-editer {
+  height: 90%;
+  overflow-y: auto;
+}
+
+.btn {
+  padding: 0 10px;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 100px;
+
+  background-color: #1f87ee;
+  margin-left: 30px;
+  color: #eee;
+}
+
+.btn.is-disable {
+  background-color: #a8a8a8;
+  color: #eee;
+  pointer-events: none;
+}
+
+.title-edit {
+  width: 35%;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: bold;
+
+  background-color: transparent;
+  margin: 10px;
+}
+
+.title-edit:focus {
+  border: 2px solid #1f87ee;
+}
+
+.btn-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.redirect-link.submit {
+  cursor: pointer;
+  padding: 5px 30px;
+  border-radius: 5px;
+  margin-left: 20px;
+  border: 2px solid transparent;
+
+  background-color: #1f87ee;
+  color: #eee;
+}
+
+.redirect-link.submit:hover {
+  border: 2px solid #a8a8a8;
+}
+
+.redirect-link.is-disable {
+  background-color: #a8a8a8;
+  color: #eee;
+  pointer-events: none;
+}
+
+.redirect-link.cancel {
+  cursor: pointer;
+  padding: 5px 30px;
+  border-radius: 5px;
+  margin-left: 20px;
+
+  background-color: #a8a8a8;
+  color: #eee;
+  border: 2px solid transparent;
+}
+
+.redirect-link.cancel:hover {
+  border: 2px solid #1f87ee;
+}
