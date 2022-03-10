@@ -68,7 +68,7 @@ window.addEventListener("load", function () {
 
         linkSubmit.setAttribute(
           "href",
-          `https://thinhnguyen1102.github.io/index.html`
+          `https://thinhnguyen1102.github.io/writer-web-app/index.html`
         );
       });
     },
@@ -76,7 +76,10 @@ window.addEventListener("load", function () {
       const linkCancel = $(".redirect-link.cancel");
 
       linkCancel.addEventListener("click", function () {
-        linkCancel.setAttribute("href", `http://127.0.0.1:5500/index.html`);
+        linkCancel.setAttribute(
+          "href",
+          `https://thinhnguyen1102.github.io/writer-web-app/index.html`
+        );
       });
     },
     run: function () {

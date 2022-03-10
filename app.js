@@ -102,11 +102,13 @@ window.addEventListener("load", function () {
         a_node.setAttribute(
           "href",
           `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=true&id=${noteId}`
+          // `http://127.0.0.1:5500/text-edit.html?edit=true&id=${noteId}`
         );
       } else {
         a_node.setAttribute(
           "href",
           `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=false`
+          // `http://127.0.0.1:5500/text-edit.html?edit=false`
         );
       }
     },
