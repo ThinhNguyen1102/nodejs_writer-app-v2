@@ -106,7 +106,7 @@ window.addEventListener("load", function () {
       } else {
         a_node.setAttribute(
           "href",
-          `http://127.0.0.1:5500/text-edit.html?edit=false`
+          `https://thinhnguyen1102.github.io/text-edit.html?edit=false`
         );
       }
     },
