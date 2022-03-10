@@ -106,7 +106,7 @@ window.addEventListener("load", function () {
       } else {
         a_node.setAttribute(
           "href",
-          `https://thinhnguyen1102.github.io/writer-web-app/ttext-edit.html?edit=false`
+          `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=false`
         );
       }
     },
