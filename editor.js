@@ -66,7 +66,10 @@ window.addEventListener("load", function () {
 
         localStorage.setItem("notes", JSON.stringify(noteStorage));
 
-        linkSubmit.setAttribute("href", `http://127.0.0.1:5500/index.html`);
+        linkSubmit.setAttribute(
+          "href",
+          `https://thinhnguyen1102.github.io/index.html`
+        );
       });
     },
     cancelEdit: function () {

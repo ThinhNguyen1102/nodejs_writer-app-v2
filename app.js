@@ -101,7 +101,7 @@ window.addEventListener("load", function () {
       if (isEdit) {
         a_node.setAttribute(
           "href",
-          `http://127.0.0.1:5500/text-edit.html?edit=true&id=${noteId}`
+          `https://thinhnguyen1102.github.io/text-edit.html?edit=true&id=${noteId}`
         );
       } else {
         a_node.setAttribute(
