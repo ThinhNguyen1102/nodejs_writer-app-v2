@@ -10,6 +10,17 @@ window.addEventListener("load", function () {
       }
     },
     renderNoteFromLS: function () {
+      const tabContents = [...$$(".tab-content")];
+      tabContents.forEach((item) => {
+        let child = item.lastElementChild;
+
+        while (child) {
+          item.removeChild(child);
+
+          child = item.lastElementChild;
+        }
+      });
+
       noteStorage.sort(function (a, b) {
         return b.lastUpdate - a.lastUpdate;
       });
@@ -72,12 +83,13 @@ window.addEventListener("load", function () {
         });
       });
     },
-    switchTabNote: function () {
+    switchTabNote: function (renderNoteFromLS) {
       const tabHeaders = [...$$(".tab-item")];
       const tabContents = [...$$(".tab-content")];
 
       tabHeaders.forEach((item) => {
         item.addEventListener("click", function (e) {
+          renderNoteFromLS();
           e.target.classList.add("is-active");
 
           const numTab = e.target.dataset.tab;
@@ -241,7 +253,7 @@ window.addEventListener("load", function () {
       const _this = this;
 
       _this.getDataFromLS();
-      _this.switchTabNote();
+      _this.switchTabNote(_this.renderNoteFromLS);
       _this.renderNoteFromLS();
       _this.featureHandle(
         _this.openTextEditor,
