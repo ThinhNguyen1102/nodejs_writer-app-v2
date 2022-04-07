@@ -4,9 +4,13 @@ window.addEventListener("load", function () {
   let noteStorage = [];
 
   const app = {
-    getDataFromLS: function () {
-      if (localStorage.getItem("notes")) {
-        noteStorage = JSON.parse(localStorage.getItem("notes"));
+    getDataFromLS: async function () {
+      try {
+        //-------------------------- FETCH API
+        const dataStream = await fetch("http://localhost:8080/api/note");
+        return dataStream;
+      } catch (err) {
+        console.log(err);
       }
     },
     renderNoteFromLS: function () {
@@ -113,24 +117,24 @@ window.addEventListener("load", function () {
       if (isEdit) {
         a_node.setAttribute(
           "href",
-          `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=true&id=${noteId}`
-          // `http://127.0.0.1:5500/text-edit.html?edit=true&id=${noteId}`
+          // `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=true&id=${noteId}`
+          `http://127.0.0.1:5500/frontend/text-edit.html?edit=true&id=${noteId}`
         );
       } else {
         a_node.setAttribute(
           "href",
-          `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=false`
-          // `http://127.0.0.1:5500/text-edit.html?edit=false`
+          // `https://thinhnguyen1102.github.io/writer-web-app/text-edit.html?edit=false`
+          `http://127.0.0.1:5500/frontend/text-edit.html?edit=false`
         );
       }
     },
-    featureHandle: function (
+    featureHandle: async function (
       openTextEditor,
       dowloadNote,
       viewNote,
       renderNoteFromLS
     ) {
-      document.addEventListener("click", function (e) {
+      document.addEventListener("click", async function (e) {
         if (e.target.matches(".new-note")) {
           openTextEditor(false, null, e.target);
         }
@@ -140,7 +144,10 @@ window.addEventListener("load", function () {
         }
         if (e.target.matches(".link-item.bookmark")) {
           const noteId = e.target.parentNode.getAttribute("data-id");
-          const note = noteStorage.find((item) => item.id === noteId);
+          const dataStream = await fetch(
+            `http://localhost:8080/api/note/${noteId}`
+          );
+          const note = await dataStream.json();
 
           note.bookmark =
             note.bookmark === true
@@ -148,7 +155,34 @@ window.addEventListener("load", function () {
               : (note.bookmark = true);
 
           e.target.firstElementChild.classList.toggle("is-active");
-          localStorage.setItem("notes", JSON.stringify(noteStorage));
+
+          //-------------------------- FETCH API
+          try {
+            const saveData = await fetch("http://localhost:8080/api/note", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(note),
+            });
+
+            console.log(saveData);
+          } catch (err) {
+            console.log(err);
+          }
+
+          // ------------- then - catch
+          // fetch("http://localhost:8080/api/note", {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify(noteStorage),
+          // })
+          //   .then((result) => {
+          //     console.log(result);
+          //   })
+          //   .catch((err) => console.log(err));
 
           // const tabContents = [...$$(".tab-content")];
           // tabContents.forEach((node) => {
@@ -179,7 +213,10 @@ window.addEventListener("load", function () {
         }
         if (e.target.matches(".link-item.remove")) {
           const noteId = e.target.parentNode.getAttribute("data-id");
-          const note = noteStorage.find((item) => item.id === noteId);
+          const dataStream = await fetch(
+            `http://localhost:8080/api/note/${noteId}`
+          );
+          const note = await dataStream.json();
           const lastUpdate = new Date(note.lastUpdate).toLocaleString("vi-VI");
 
           const alertRemoveHtml = `<div class="alert-overlay">
@@ -203,8 +240,32 @@ window.addEventListener("load", function () {
         if (e.target.matches(".btn-item.delele-btn")) {
           document.body.removeChild(e.target.parentNode.parentNode.parentNode);
           const noteId = e.target.getAttribute("data-id");
-          noteStorage = noteStorage.filter((val) => val.id !== noteId);
-          localStorage.setItem("notes", JSON.stringify(noteStorage));
+          // ------------------ FETCH API
+
+          try {
+            const saveData = await fetch(
+              `http://localhost:8080/api/note/${noteId}`,
+              {
+                method: "DELETE",
+              }
+            );
+
+            // console.log(saveData);
+          } catch (err) {
+            console.log(err);
+          }
+
+          // fetch("http://localhost:8080/api/note", {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify(noteStorage),
+          // })
+          //   .then((result) => {
+          //     console.log(result);
+          //   })
+          //   .catch((err) => console.log(err));
 
           const notes = [...$$(".note-wrapper")];
           notes.forEach((item) => {
@@ -231,8 +292,13 @@ window.addEventListener("load", function () {
       document.body.appendChild(element);
       element.click();
     },
-    viewNote: function (noteId) {
-      const note = noteStorage.find((item) => item.id === noteId);
+    viewNote: async function (noteId) {
+      // const note = noteStorage.find((item) => item.id === noteId);
+      const dataStream = await fetch(
+        `http://localhost:8080/api/note/${noteId}`
+      );
+      const note = await dataStream.json();
+
       const lastUpdate = new Date(note.lastUpdate).toLocaleString("vi-VI");
       const viewNodeHtml = `<div class="view-overlay">
         <div class="view-wrapper">
@@ -249,18 +315,21 @@ window.addEventListener("load", function () {
 
       document.body.insertAdjacentHTML("beforeend", viewNodeHtml);
     },
-    run: function () {
+    run: async function () {
       const _this = this;
 
-      _this.getDataFromLS();
-      _this.switchTabNote(_this.renderNoteFromLS);
-      _this.renderNoteFromLS();
-      _this.featureHandle(
-        _this.openTextEditor,
-        _this.dowloadNote,
-        _this.viewNote,
-        _this.renderNoteFromLS
-      );
+      noteStorage = await (await _this.getDataFromLS()).json();
+      if (noteStorage) {
+        console.log(noteStorage);
+        _this.switchTabNote(_this.renderNoteFromLS);
+        _this.renderNoteFromLS();
+        _this.featureHandle(
+          _this.openTextEditor,
+          _this.dowloadNote,
+          _this.viewNote,
+          _this.renderNoteFromLS
+        );
+      }
     },
   };
   app.run();

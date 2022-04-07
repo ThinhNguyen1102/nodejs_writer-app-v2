@@ -103,7 +103,7 @@ button {
   pointer-events: none;
 }
 
-.title-edit {
+.title-edit, .password {
   width: 35%;
   height: 50px;
   border-radius: 10px;
@@ -114,8 +114,12 @@ button {
   margin: 10px;
 }
 
-.title-edit:focus {
+.title-edit:focus, .password:focus {
   border: 2px solid #1f87ee;
+}
+
+.input-hidden {
+  display: none;
 }
 
 .btn-list {
